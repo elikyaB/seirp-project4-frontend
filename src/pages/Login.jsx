@@ -4,23 +4,23 @@ import { useNavigate } from "react-router-dom"
 
 const Login = (props) => {
     let navigate = useNavigate()
-    
-    const URL = props.url+'/user'
-    const getUser = (account) => {
-        const queryString = URL+"?email="+account.email+"&password="+account.password
-        console.log(queryString)
+    const URL = props.local+'/user'
+    const getUser = async (account) => {
+        // const queryString = URL+"?email="+account.email+"&password="+account.password
+        // console.log(queryString)
         // make the post request to API
-        fetch("https://seirp-project4.herokuapp.com/user/f71d66527a7d4ac9", {
+        await fetch(URL+'/login', {
             method: "post",
-            // headers: {"Content-Type": "application/json"}
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(account)
         }).then(function(response) {
-            // console.log(typeof(response))
-            return response.clone().json()
+            console.log(response)
+            return response
         })
-        .then(function(data) {
-            console.log(data)
-            // props.getAuth(data)
-        })
+        // .then(function(data) {
+        //     console.log(data)
+        //     // props.getAuth(data)
+        // })
     }
 
     //state to hold form data
@@ -45,13 +45,14 @@ const Login = (props) => {
         event.preventDefault()
         // pass the form data
         getUser(newForm)
-            // .then(
+            .then(
+                () => {console.log(newForm)
                 // reset the form to empty
                 setNewForm({
                     email: "",
                     password: ""
-            })
-            // )
+            })}
+            )
         // .then(navigate("/diary"))
     }
 
