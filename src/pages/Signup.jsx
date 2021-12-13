@@ -4,15 +4,14 @@ import { useNavigate } from "react-router-dom"
 
 const Signup = (props) => {
     let navigate = useNavigate()
-    const URL = props.local+'/user'
+    const URL = props.url+'/user'
 
     const createUser = async (item) => {
         console.log(item, URL)
         // make the post request to API
         await fetch(URL, {
             method: "post",
-            headers: {"Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"},
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item),
         })
     }

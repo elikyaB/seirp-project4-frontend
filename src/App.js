@@ -36,8 +36,8 @@ function App() {
   //////////////
 
   const getDiary = async () => {
-    const response = fetch(url+"/user")
-    const data = await (await response).json()
+    const response = await fetch(url+"/user")
+    const data = await response.json()
     console.log(data)
     setDiary(data)
   }
